@@ -38,8 +38,6 @@ export const ItemFormModal: React.FC<ItemFormModalProps> = ({
   onSave,
   onDelete,
 }) => {
-  if (!isOpen) return null;
-
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [category, setCategory] = useState(CATEGORIES[0]);
@@ -90,6 +88,8 @@ export const ItemFormModal: React.FC<ItemFormModalProps> = ({
     }
     setError(null);
   }, [itemToEdit, isOpen]);
+
+  if (!isOpen) return null;
 
   const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

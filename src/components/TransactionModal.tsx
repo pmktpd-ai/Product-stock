@@ -49,8 +49,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
   onClose,
   onSubmit,
 }) => {
-  if (!isOpen || !item) return null;
-
   // Defaults
   const [quantity, setQuantity] = useState<number>(1);
   const [date, setDate] = useState<string>(() => {
@@ -62,7 +60,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
   const [location, setLocation] = useState<string>('');
   const [operator, setOperator] = useState<string>('ช่างเทคนิค');
   const [note, setNote] = useState<string>('');
-  const [imagePreview, setImagePreview] = useState<string | null>(item.imageUrl || null);
+  const [imagePreview, setImagePreview] = useState<string | null>(item?.imageUrl || null);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
   const [validationError, setValidationError] = useState<string | null>(null);
 
@@ -71,10 +69,12 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
   useEffect(() => {
     setQuantity(1);
     setValidationError(null);
-    if (mode === 'IN') {
+    if (item && mode === 'IN') {
       setImagePreview(item.imageUrl || null);
     }
   }, [item, mode]);
+
+  if (!isOpen || !item) return null;
 
   // Handle image upload / camera capture and resize to efficient web size
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

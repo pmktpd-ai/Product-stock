@@ -553,62 +553,74 @@ export default function App() {
       </div>
 
       {/* Modals */}
-      <TransactionModal
-        isOpen={isTransactionModalOpen}
-        item={transactionItem}
-        mode={transactionMode}
-        onClose={() => setIsTransactionModalOpen(false)}
-        onSubmit={handleProcessTransaction}
-      />
+      {isTransactionModalOpen && transactionItem && (
+        <TransactionModal
+          isOpen={isTransactionModalOpen}
+          item={transactionItem}
+          mode={transactionMode}
+          onClose={() => setIsTransactionModalOpen(false)}
+          onSubmit={handleProcessTransaction}
+        />
+      )}
 
-      <ReplenishModal
-        isOpen={isReplenishModalOpen}
-        items={items}
-        onClose={() => setIsReplenishModalOpen(false)}
-        onStockInItem={handleOpenStockIn}
-      />
+      {isReplenishModalOpen && (
+        <ReplenishModal
+          isOpen={isReplenishModalOpen}
+          items={items}
+          onClose={() => setIsReplenishModalOpen(false)}
+          onStockInItem={handleOpenStockIn}
+        />
+      )}
 
-      <HistoryModal
-        isOpen={isHistoryModalOpen}
-        transactions={transactions}
-        onClose={() => setIsHistoryModalOpen(false)}
-        onUndoTransaction={handleUndoTransaction}
-        onOpenSheets={() => {
-          setIsHistoryModalOpen(false);
-          setIsSheetsModalOpen(true);
-        }}
-      />
+      {isHistoryModalOpen && (
+        <HistoryModal
+          isOpen={isHistoryModalOpen}
+          transactions={transactions}
+          onClose={() => setIsHistoryModalOpen(false)}
+          onUndoTransaction={handleUndoTransaction}
+          onOpenSheets={() => {
+            setIsHistoryModalOpen(false);
+            setIsSheetsModalOpen(true);
+          }}
+        />
+      )}
 
-      <AdminLoginModal
-        isOpen={isAdminLoginModalOpen}
-        onClose={() => setIsAdminLoginModalOpen(false)}
-        onLoginSuccess={() => {
-          setIsAdmin(true);
-          addToast({
-            type: 'success',
-            title: 'เข้าสู่ระบบ Admin สำเร็จ',
-            description: 'คุณสามารถเพิ่ม/แก้ไขรายการ ตั้งค่าจุดเตือน และจัดการข้อมูลได้แล้ว',
-          });
-        }}
-      />
+      {isAdminLoginModalOpen && (
+        <AdminLoginModal
+          isOpen={isAdminLoginModalOpen}
+          onClose={() => setIsAdminLoginModalOpen(false)}
+          onLoginSuccess={() => {
+            setIsAdmin(true);
+            addToast({
+              type: 'success',
+              title: 'เข้าสู่ระบบ Admin สำเร็จ',
+              description: 'คุณสามารถเพิ่ม/แก้ไขรายการ ตั้งค่าจุดเตือน และจัดการข้อมูลได้แล้ว',
+            });
+          }}
+        />
+      )}
 
-      <ItemFormModal
-        isOpen={isItemFormModalOpen}
-        itemToEdit={itemToEdit}
-        onClose={() => setIsItemFormModalOpen(false)}
-        onSave={handleSaveItem}
-        onDelete={handleDeleteItem}
-      />
+      {isItemFormModalOpen && (
+        <ItemFormModal
+          isOpen={isItemFormModalOpen}
+          itemToEdit={itemToEdit}
+          onClose={() => setIsItemFormModalOpen(false)}
+          onSave={handleSaveItem}
+          onDelete={handleDeleteItem}
+        />
+      )}
 
-      <GoogleSheetsModal
-        isOpen={isSheetsModalOpen}
-        sheetsConfig={sheetsConfig}
-        items={items}
-        transactions={transactions}
-        onClose={() => setIsSheetsModalOpen(false)}
-        onUpdateConfig={setSheetsConfig}
-        onShowToast={(msg, type) => addToast({ type, title: msg })}
-      />
+      {isSheetsModalOpen && (
+        <GoogleSheetsModal
+          isOpen={isSheetsModalOpen}
+          sheetsConfig={sheetsConfig}
+          items={items}
+          transactions={transactions}
+          onClose={() => setIsSheetsModalOpen(false)}
+          onUpdateConfig={setSheetsConfig}
+          onShowToast={(msg, type) => addToast({ type, title: msg })}
+        />
+      )}
 
       {/* Toasts */}
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
