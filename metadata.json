@@ -1,0 +1,6 @@
+{
+  "name": "ระบบสต๊อกอุปกรณ์ช่าง",
+  "description": "เว็บแอปบันทึกสต๊อกสินค้าและอุปกรณ์งานช่างซ่อม รองรับมือถือ แจ้งเตือนของใกล้หมด บันทึกเข้าออก และเชื่อมต่อ Google Sheets",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
